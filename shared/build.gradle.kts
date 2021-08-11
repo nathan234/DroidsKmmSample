@@ -8,6 +8,23 @@ plugins {
 val ktor_version = "1.5.3"
 val kotlinx_coroutines_version = "1.4.3-native-mt"
 
+android {
+    configurations {
+        create("androidTestApi")
+        create("androidTestDebugApi")
+        create("androidTestReleaseApi")
+        create("testApi")
+        create("testDebugApi")
+        create("testReleaseApi")
+    }
+    compileSdk = 30
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 30
+    }
+}
+
 kotlin {
     android()
 
@@ -43,15 +60,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-ios:$ktor_version")
             }
         }
-    }
-}
-
-android {
-    compileSdkVersion(30)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(30)
     }
 }
 
